@@ -17,7 +17,7 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            Profile.objects.create(name=user.username, user_type=user_type, user=user)
+            Profile.objects.create(name=user.username, user_type='DOCTOR' if user_type == DOCTOR_TYPE else 'PATIENT', user=user)
             user = auth.authenticate(username=request.POST.get('username'), password=request.POST.get('password1'))
             
             if user:

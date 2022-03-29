@@ -19,9 +19,12 @@ from django.shortcuts import render
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
+from users.models import Profile
 
 def home(request):
-    return render(request,'base.html')
+    doctors = Profile.objects.filter(user_type = 'doctor').all()[:5]
+    print(doctors)
+    return render(request,'base.html',{ 'doctors': doctors })
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
