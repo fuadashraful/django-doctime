@@ -23,14 +23,14 @@ from users.models import Profile
 
 def home(request):
     doctors = Profile.objects.filter(user_type = 'doctor').all()[:5]
-    print(doctors)
     return render(request,'base.html',{ 'doctors': doctors })
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('videochat/', include('videochat.urls') ),
+    path('vediochat/', include('videochat.urls') ),
     path('users/', include('users.urls') ),
-    url(r'^',home, name = 'home'), 
+    path('general_services/',include('general_services.urls')),
+    url(r'^home/',home, name = 'home'), 
 ]
 
 if settings.DEBUG:

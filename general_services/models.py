@@ -19,7 +19,13 @@ class Notification(models.Model):
 class AppointMent(models.Model):
     doctor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctors')
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='patients')
-    appointment_time = models.DateTimeField(auto_now_add=True)
+    appointment_time = models.DateField()
+    age = models.IntegerField(default=0)
+    contact_no = models.CharField(max_length=100, default='+880')
+    appointment_status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.patient.username.upper()} has appoinment at {self.appointment_time}'
 
 
 class Pescription(models.Model):
