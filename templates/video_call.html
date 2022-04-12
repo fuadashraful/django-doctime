@@ -9,8 +9,9 @@
             <div id="userName">
                 <div style="display: flex; flex-direction: column; align-items: center; width: 300px;">
                     <input placeholder="What should we call you?"
+                        value="{{user.username}}"
                         style="text-align:center; height: 50px; font-size: xx-large;" type="text" name=""
-                        id="userNameInput">
+                        id="{{ user.username }}">
                     <div style="height: 5px;"></div>
                     <button onclick="login()" class="actionButton btn btn-primary">Login</button>
                 </div>
@@ -33,7 +34,7 @@
                         <div class="dialNumber">
                         </div>
                         <div class="dialNumber">
-                            <button class="dialActionButton" onclick="call()">Call</button>
+                            <button class="btn btn-primary" onclick="call()">Call</button>
                         </div>
                         <div class="dialNumber">
                         </div>
@@ -56,7 +57,7 @@
                         <h2 style="line-height: 0px;"><span id="callerName"></span></h2>
                     </div>
                     <div class="itemWrapper" style="display: flex; flex-direction: row; margin-bottom: 20px;">
-                        <button class="actionButton" onclick="answer()">Answer</button>
+                        <button class="actionButton btn btn-primary" onclick="answer()">Answer</button>
                     </div>
                 </div>
             </div>
@@ -122,7 +123,7 @@
     </script>
     <script>
         function login() {
-            let userName = document.getElementById("userNameInput").value;
+            let userName = document.getElementById("{{user.username}}").value;
             myName = userName;
             document.getElementById("userName").style.display = "none";
             document.getElementById("call").style.display = "block";
@@ -132,6 +133,7 @@
 
             connectSocket();
         }
+        login();
     </script>
 {% endblock JS %}
 

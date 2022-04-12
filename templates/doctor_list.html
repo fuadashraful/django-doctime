@@ -25,7 +25,7 @@
                 {% for doctor in doctors %}
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                        <h5 class="card-title">{{ doctor.name }}</h5>
+                        <h5 class="card-title">{{doctor.name}} {{ doctor.id }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ doctor.location }}</h6>
                         <h6 class="card-subtitle mb-2 text-muted">{{ doctor.fee }}</h6>
                         <a href="{% url 'book_appoinment' doctor.id %}" class="btn btn-sm btn-primary">Appoinment</a>

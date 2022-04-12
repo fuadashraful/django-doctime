@@ -8,7 +8,7 @@ from general_services.models import AppointMent
 
 def doctor_list(request):
     context = {
-        'doctors': Profile.objects.filter(user_type = 'doctor').all(),
+        'doctors': Profile.objects.filter(user_type = 'doctor').all()
     }
 
     return render(request, 'doctor_list.html', context)
@@ -30,6 +30,7 @@ def book_appoinment(request, doctor_id):
         contact_no = request.POST.get('contact_no') 
         age = request.POST.get('age')
         doctor = User.objects.get(pk=doctor_id)
+        print(doctor.pk)
         
         appoinment = AppointMent(
             doctor=doctor,
