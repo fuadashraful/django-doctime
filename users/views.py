@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from users.forms import SignUpForm, UserLoginForm
 from users.models import Profile
+from general_services.models import AppointMent
 
 DOCTOR_TYPE = 1
 PATIENT_TYPE = 2
@@ -62,6 +63,13 @@ def login(request):
     return render(request,'login.html', context)
 
 @login_required
-def profile(request):
-    
-    return render(request, 'user_profile.html')
+def profile(request, id):
+    context = {
+        'current_user_profile': Profile.objects.get(user=request.user)
+    } 
+
+    if context.get('current_user_profile').user_type == 'doctor':
+        context['appoinments'] = AppointMent.objects.filter(doctor=request.user)
+    else:
+        context['appoinments'] = AppointMent.objects.filter(patient=request.user)
+    return render(request, 'user_profile.html', context)

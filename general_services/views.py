@@ -44,3 +44,12 @@ def book_appoinment(request, doctor_id):
         return redirect('home')
 
     return render(request, 'book_appoinment.html', context)
+
+
+@login_required
+def change_appoinment_status(request, id):
+    appoinment = AppointMent.objects.get(pk=id)
+    appoinment.appointment_status = not appoinment.appointment_status
+    appoinment.save()
+    print(f'Appoinment id is {appoinment.id}')
+    return redirect('home')
