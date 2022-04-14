@@ -5,7 +5,9 @@ from .views import (
         doctor_details,
         book_appoinment,
         change_appoinment_status,
-        add_pescription)
+        add_pescription,
+        delete_appoinment,
+        patient_pescription)
 
 
 urlpatterns = [
@@ -14,4 +16,6 @@ urlpatterns = [
     path('book_appoinment/<int:doctor_id>/', book_appoinment, name='book_appoinment'),
     path('change_appoinment_status/<int:id>/', change_appoinment_status, name='change_appoinment_status'),
     path('add_pescription/<int:id>/', add_pescription, name='add_pescription'),
+    path('delete_appoinment/<int:id>/', delete_appoinment, name='delete_appoinment'),
+    path('patient_pescription/<int:id>/', patient_pescription, name='patient_pescription'),
 ]

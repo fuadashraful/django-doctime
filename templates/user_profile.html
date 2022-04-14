@@ -89,7 +89,7 @@
                       >
                         Cancle
                       </button>
-                      <a href="#"
+                      <a href="{% url 'delete_appoinment' appoinment.id %}"
                         ><button type="button" class="btn btn-sm btn-danger">
                           Delete
                         </button></a
@@ -125,7 +125,11 @@
                 <td>{{ appoinment.appointment_time }}</td>
                 <td>{{ appoinment.contact_no }}</td>
                 <td>
-                  <a class="btn btn-sm btn-success">Your Pescription</a>
+                  <a
+                    href="{% url 'patient_pescription' appoinment.id %}"
+                    class="btn btn-sm btn-success"
+                    >Your Pescription</a
+                  >
                 </td>
                 <td>
                   <button
@@ -168,7 +172,7 @@
                       >
                         Cancle
                       </button>
-                      <a href=""
+                      <a href="{% url 'delete_appoinment' appoinment.id %}"
                         ><button type="button" class="btn btn-sm btn-danger">
                           Delete
                         </button></a

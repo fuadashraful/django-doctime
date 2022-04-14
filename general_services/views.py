@@ -6,7 +6,7 @@ from django.contrib import messages
 from users.models import Profile
 from general_services.models import AppointMent, PescribedMedicine
 from general_services.forms import PescribedMedicineForm
-
+from general_services.utils import encrypt, decrypt
 
 def doctor_list(request):
     context = {
@@ -68,3 +68,25 @@ def add_pescription(request, id):
     else:
         context['form'] = PescribedMedicineForm()
     return render(request, 'add_pescription.html', context)
+
+@login_required
+def delete_appoinment(request, id):
+    appointment = AppointMent.objects.get(pk=id)
+    appointment.delete()
+    return redirect('home')
+
+@login_required
+def patient_pescription(request, id):
+    pescription = None
+    try:
+        pescription = PescribedMedicine.objects.get(
+                    appointment=AppointMent.objects.get(pk=id)
+                )
+    except:
+        pass
+    
+    context = {
+        'pescription': pescription
+    }
+
+    return render(request, 'patient_pescription.html', context)

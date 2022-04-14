@@ -144,3 +144,5 @@ CHANNEL_LAYERS={
         "BACKEND": "channels.layers.InMemoryChannelLayer"
      }
 }
+
+ENCRYPT_KEY = b'ecLg-tymzspI0CPGgHKbjPwN004gs9PIzcUYT2_cIDQ='
