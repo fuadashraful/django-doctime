@@ -26,6 +26,7 @@ def signup(request):
             messages.success(request,"User Saved Successfully")
         else:
             messages.error(request,"Error In this form")
+        return redirect('home')
     else:
         form = SignUpForm()
         context[ 'form' ] = form

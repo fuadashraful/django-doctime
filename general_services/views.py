@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 from users.models import Profile
-from general_services.models import AppointMent
+from general_services.models import AppointMent, PescribedMedicine
+from general_services.forms import PescribedMedicineForm
+
 
 def doctor_list(request):
     context = {
@@ -29,7 +31,7 @@ def book_appoinment(request, doctor_id):
         appoinment_time = request.POST.get('appoinment_date')
         contact_no = request.POST.get('contact_no') 
         age = request.POST.get('age')
-        doctor = User.objects.get(pk=doctor_id)
+        doctor = User.objects.filter(id=doctor_id)
         print(doctor.pk)
         
         appoinment = AppointMent(
@@ -54,3 +56,15 @@ def change_appoinment_status(request, id):
     appoinment.save()
     print(f'Appoinment id is {appoinment.id}')
     return redirect('home')
+
+@login_required
+def add_pescription(request, id):
+    context = {}
+    if request.method == 'POST':
+        pescription = PescribedMedicineForm(request.POST)
+        pescription.instance.appointment = AppointMent.objects.get(pk=id)
+        pescription.save()
+        return redirect('home')
+    else:
+        context['form'] = PescribedMedicineForm()
+    return render(request, 'add_pescription.html', context)
