@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from general_services.utils import encrypt, decrypt
 
 class Medicine(models.Model):
     name = models.CharField(max_length=100)
@@ -39,5 +40,9 @@ class PescribedMedicine(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        self.comments = encrypt(self.comments)
+        super(PescribedMedicine, self).save(*args, **kwargs)
+        
     def __str__(self):
         return f"appoinment no {self.pk}"

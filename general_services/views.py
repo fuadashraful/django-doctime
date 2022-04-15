@@ -62,10 +62,11 @@ def add_pescription(request, id):
     context = {}
     if request.method == 'POST':
         pescription = PescribedMedicineForm(request.POST)
-        instance = pescription.save(commit=False)
-        instance.appointment = AppointMent.objects.get(pk=id)
-        instance.comments = encrypt(instance.comments)
-        instance.save()
+        pescription.instance.appointment = AppointMent.objects.get(pk=id)
+        pescription.save()
+        # instance = pescription.save(commit=False)        
+        # instance.comments = encrypt(instance.comments)
+        # instance.save()
         return redirect('home')
     else:
         context['form'] = PescribedMedicineForm()
