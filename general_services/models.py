@@ -32,7 +32,7 @@ class AppointMent(models.Model):
 
 
 class PescribedMedicine(models.Model):
-    comments = models.CharField(max_length=255, null=True)
+    comments = models.CharField(max_length=50000, null=True)
     appointment = models.ForeignKey(AppointMent, on_delete=models.CASCADE,null=True)
     medicine = models.ManyToManyField(Medicine,related_name='medicines',null=True)
     test = models.ManyToManyField(MedicalTest,related_name='tests',null=True)
@@ -40,4 +40,4 @@ class PescribedMedicine(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.comments
+        return f"appoinment no {self.pk}"
